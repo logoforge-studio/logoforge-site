@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://logoforge-studio.github.io/logoforge-site/sitemap.xml
