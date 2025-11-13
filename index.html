@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LogoForge – Crafting Brands, One Logo at a Time</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #050816;
+      --bg-section: #0b1220;
+      --accent: #ffc857;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --card-bg: #020617;
+      --border-subtle: #1f2937;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Lato', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(to right, rgba(5,8,22,0.92), rgba(5,8,22,0.7));
+      border-bottom: 1px solid rgba(148,163,184,0.2);
+    }
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid rgba(248,250,252,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 0, #facc15, #f97316 40%, #0f172a 100%);
+      box-shadow: 0 0 16px rgba(251,191,36,0.55);
+      font-size: 0.9rem;
+    }
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+    }
+    nav ul {
+      display: flex;
+      gap: 1.4rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    nav ul li a {
+      position: relative;
+      padding-bottom: 4px;
+    }
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #facc15, #fb923c);
+      transition: width 0.18s ease-out;
+    }
+    nav ul li a:hover {
+      color: var(--text-main);
+    }
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 0.45rem 0.95rem;
+      border: 1px solid rgba(148,163,184,0.5);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .btn-ghost span {
+      font-size: 0.9rem;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.2rem 3rem;
+    }
+
+    /* HERO */
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      gap: 2.5rem;
+      align-items: center;
+      padding-top: 1.5rem;
+      padding-bottom: 2.5rem;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      border-radius: 999px;
+      border: 1px solid rgba(248,250,252,0.12);
+      padding: 0.2rem 0.6rem;
+      background: linear-gradient(to right, rgba(15,23,42,0.8), rgba(15,23,42,0.4));
+      font-size: 0.7rem;
+    }
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, #22c55e, #16a34a 55%, #14532d 100%);
+      box-shadow: 0 0 12px rgba(34,197,94,0.7);
+    }
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.25rem, 3vw + 1rem, 3rem);
+      margin-top: 0.8rem;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.04em;
+    }
+    .hero h1 span {
+      background: linear-gradient(to right, #facc15, #fb923c);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .hero p {
+      color: var(--text-muted);
+      max-width: 32rem;
+      font-size: 0.98rem;
+    }
+    .hero-ctas {
+      margin-top: 1.4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #facc15, #fb923c);
+      border-radius: 999px;
+      border: none;
+      padding: 0.55rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #111827;
+      box-shadow: 0 10px 30px rgba(251,191,36,0.35);
+      cursor: pointer;
+    }
+    .btn-secondary {
+      border-radius: 999px;
+      padding: 0.55rem 1.2rem;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.7);
+      font-size: 0.88rem;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.4rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .hero-badge {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      padding: 0.25rem 0.7rem;
+      background: radial-gradient(circle at top left, rgba(249,115,22,0.25), rgba(15,23,42,0.6));
+    }
+
+    .hero-visual {
+      position: relative;
+      padding: 1.6rem;
+      border-radius: 1.4rem;
+      background: radial-gradient(circle at top, rgba(56,189,248,0.18), rgba(15,23,42,0.9));
+      border: 1px solid rgba(148,163,184,0.4);
+      box-shadow: 0 18px 45px rgba(15,23,42,0.9);
+      overflow: hidden;
+    }
+    .grid-logos {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+    }
+    .logo-card {
+      padding: 0.7rem 0.8rem;
+      border-radius: 0.9rem;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.8), rgba(15,23,42,1));
+      border: 1px solid rgba(148,163,184,0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-height: 92px;
+    }
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(248,250,252,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+    .logo-title {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+    .logo-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+    .logo-card:nth-child(1) .logo-mark {
+      background: conic-gradient(from 160deg, #facc15, #fb923c, #f97316, #facc15);
+    }
+    .logo-card:nth-child(2) .logo-mark {
+      background: radial-gradient(circle at 0 0, #22c55e, #16a34a, #14532d);
+    }
+    .logo-card:nth-child(3) .logo-mark {
+      background: radial-gradient(circle at 0 0, #38bdf8, #0ea5e9, #0369a1);
+    }
+    .logo-card:nth-child(4) .logo-mark {
+      background: conic-gradient(from 200deg, #f472b6, #db2777, #4c1d95);
+    }
+    .hero-floating-pill {
+      position: absolute;
+      right: 1.4rem;
+      top: 1.2rem;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.7rem;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(248,250,252,0.14);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--text-muted);
+    }
+    .hero-floating-pill strong {
+      color: var(--accent);
+    }
+
+    /* SECTION BASE */
+    section {
+      margin-top: 2.5rem;
+    }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.1rem;
+      gap: 1rem;
+    }
+    .section-heading h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.35rem;
+    }
+    .section-heading p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      max-width: 420px;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .portfolio-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 0.9rem;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .portfolio-logo {
+      border-radius: 0.7rem;
+      padding: 0.8rem;
+      background: radial-gradient(circle at 0 0, rgba(248,250,252,0.06), rgba(15,23,42,1));
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .portfolio-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .service-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .service-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+    }
+    .service-card ul {
+      padding-left: 1rem;
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .service-card ul li {
+      margin-bottom: 0.25rem;
+    }
+
+    /* PRICING */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .pricing-card {
+      background: radial-gradient(circle at top, rgba(248,250,252,0.04), rgba(15,23,42,1));
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border-subtle);
+    }
+    .pricing-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+    .pricing-title {
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      font-size: 0.95rem;
+    }
+    .pricing-price {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0.15rem 0 0.6rem;
+    }
+    .pricing-features {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+    }
+    .pricing-features ul {
+      margin-left: 1rem;
+    }
+    .pricing-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.65);
+      padding: 0.4rem 0.9rem;
+      font-size: 0.8rem;
+      color: var(--text-main);
+      background: rgba(15,23,42,0.7);
+    }
+
+    /* ABOUT & CONTACT */
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1.7rem;
+    }
+    .about-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .about-text p + p {
+      margin-top: 0.6rem;
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.8rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .badge {
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      padding: 0.2rem 0.7rem;
+      background: rgba(15,23,42,0.8);
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--border-subtle);
+      font-size: 0.9rem;
+    }
+    .contact-card form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-top: 0.6rem;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-size: 0.8rem;
+    }
+    .field label {
+      color: var(--text-muted);
+    }
+    .field input,
+    .field textarea {
+      background: rgba(15,23,42,0.9);
+      border-radius: 0.5rem;
+      border: 1px solid rgba(148,163,184,0.6);
+      padding: 0.45rem 0.6rem;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      resize: vertical;
+      min-height: 38px;
+    }
+    .contact-note {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    footer {
+      border-top: 1px solid rgba(31,41,55,0.8);
+      padding: 1.3rem 1.2rem 2rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-align: center;
+      background: #020617;
+      margin-top: 2.4rem;
+    }
+
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .hero-visual {
+        order: -1;
+      }
+      .two-col {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      nav ul {
+        display: none;
+      }
+      .btn-ghost {
+        display: none;
+      }
+      main {
+        padding-top: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo-wrap">
+        <div class="logo-icon">LF</div>
+        <div class="logo-text">LOGOFORGE</div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <a class="btn-ghost" href="#contact">
+        <span>Start a project</span> →
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div>
+        <div class="hero-kicker">
+          <span class="pill">
+            <span class="pill-dot"></span>
+            Accepting new clients
+          </span>
+          <span>Logo design studio</span>
+        </div>
+        <h1>
+          Crafting <span>modern premium logos</span> that tell your brand story.
+        </h1>
+        <p>
+          At LogoForge, we design clean, memorable logos for startups, creators, and businesses
+          that want to look sharp and feel premium – without the agency price tag.
+        </p>
+        <div class="hero-ctas">
+          <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            Get your logo
+          </button>
+          <button class="btn-secondary" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">
+            View portfolio
+          </button>
+        </div>
+        <div class="hero-badges">
+          <div class="hero-badge">Minimal & modern</div>
+          <div class="hero-badge">Brand-first approach</div>
+          <div class="hero-badge">Multiple concepts & revisions</div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-floating-pill">
+          <span>Recent delivery:</span> <strong>NovaPeak Finance</strong>
+        </div>
+        <div class="grid-logos">
+          <div class="logo-card">
+            <div class="logo-mark">NP</div>
+            <div class="logo-title">NovaPeak Finance</div>
+            <div class="logo-sub">Sharp, geometric logomark for a fintech startup.</div>
+          </div>
+          <div class="logo-card">
+            <div class="logo-mark">AL</div>
+            <div class="logo-title">Aurora Lux Studio</div>
+            <div class="logo-sub">Luxury-inspired logo for a boutique interior brand.</div>
+          </div>
+          <div class="logo-card">
+            <div class="logo-mark">PX</div>
+            <div class="logo-title">PixelShift Media</div>
+            <div class="logo-sub">Playful yet clean logo for a content creator.</div>
+          </div>
+          <div class="logo-card">
+            <div class="logo-mark">VT</div>
+            <div class="logo-title">VerdeTech</div>
+            <div class="logo-sub">Minimal leaf-symbol logo for a green-tech company.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+      <div class="section-heading">
+        <h2>Selected logo work</h2>
+        <p>
+          A mix of modern, minimal and premium logo concepts for different industries –
+          tech, finance, lifestyle, and creators.
+        </p>
+      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-card">
+          <div class="portfolio-logo">
+            NOVAPEAK<br>
+            <span style="font-size:0.7rem;opacity:0.8;">FINANCE</span>
+          </div>
+          <div class="portfolio-meta">
+            <span>Fintech · Geometric</span>
+            <span>2025</span>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-logo">
+            AURORA<br>
+            <span style="font-size:0.7rem;opacity:0.8;">LUX STUDIO</span>
+          </div>
+          <div class="portfolio-meta">
+            <span>Interior · Luxury</span>
+            <span>2025</span>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-logo">
+            PIXELSHIFT<br>
+            <span style="font-size:0.7rem;opacity:0.8;">MEDIA</span>
+          </div>
+          <div class="portfolio-meta">
+            <span>Creator · Bold</span>
+            <span>2025</span>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <div class="portfolio-logo">
+            VERDETECH<br>
+            <span style="font-size:0.7rem;opacity:0.8;">SOLUTIONS</span>
+          </div>
+          <div class="portfolio-meta">
+            <span>Green tech · Minimal</span>
+            <span>2025</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="section-heading">
+        <h2>Services</h2>
+        <p>
+          From a single logo to a small brand kit – choose the level that fits where
+          your business is right now.
+        </p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-label">Logo essentials</div>
+          <h3>Minimal logo design</h3>
+          <p>
+            Clean, simple logo built for clarity and recognition. Perfect for startups
+            and personal brands.
+          </p>
+          <ul>
+            <li>1 main concept</li>
+            <li>1 revision round</li>
+            <li>PNG + JPG files</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-label">Brand starter</div>
+          <h3>Logo + basic brand kit</h3>
+          <p>
+            Modern logo plus the key elements you’ll reuse everywhere: colors, fonts,
+            and usage suggestions.
+          </p>
+          <ul>
+            <li>2–3 concepts</li>
+            <li>2 revision rounds</li>
+            <li>Logo on light & dark</li>
+            <li>Color & typography suggestions</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="service-label">Premium</div>
+          <h3>Premium logo pack</h3>
+          <p>
+            For brands that want a polished presence: logo variations, submarks and
+            social media exports.
+          </p>
+          <ul>
+            <li>3–5 concepts</li>
+            <li>Unlimited minor tweaks*</li>
+            <li>Submark + icon version</li>
+            <li>Social media profile files</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <div class="section-heading">
+        <h2>Pricing</h2>
+        <p>
+          Transparent, simple packages. You only pay when you approve a direction
+          you’re happy with.
+        </p>
+      </div>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-tag">Starter</div>
+          <div class="pricing-title">Single logo concept</div>
+          <div class="pricing-price">$49</div>
+          <div class="pricing-features">
+            <ul>
+              <li>1 premium minimal logo</li>
+              <li>1 revision round</li>
+              <li>Delivered as PNG + JPG</li>
+            </ul>
+          </div>
+          <a href="#contact" class="pricing-cta">Choose Starter →</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-tag">Most popular</div>
+          <div class="pricing-title">Logo + brand basics</div>
+          <div class="pricing-price">$99</div>
+          <div class="pricing-features">
+            <ul>
+              <li>2–3 logo concepts</li>
+              <li>2 revision rounds</li>
+              <li>Light & dark background versions</li>
+              <li>Simple brand color & font guide</li>
+            </ul>
+          </div>
+          <a href="#contact" class="pricing-cta">Choose Brand Basics →</a>
+        </div>
+
+        <div class="pricing-card">
+          <div class="pricing-tag">Premium</div>
+          <div class="pricing-title">Full logo pack</div>
+          <div class="pricing-price">$179</div>
+          <div class="pricing-features">
+            <ul>
+              <li>3–5 logo concepts</li>
+              <li>Submark + icon version</li>
+              <li>Social media profile exports</li>
+              <li>All files in PNG, JPG, SVG</li>
+            </ul>
+          </div>
+          <a href="#contact" class="pricing-cta">Choose Premium Pack →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT & CONTACT -->
+    <section id="about">
+      <div class="section-heading">
+        <h2>About LogoForge</h2>
+        <p>
+          A small, focused studio dedicated to logos that feel modern, premium and
+          easy to use across all platforms.
+        </p>
+      </div>
+      <div class="two-col">
+        <div class="about-text">
+          <p>
+            LogoForge is built on a simple idea: your logo should be the clearest,
+            sharpest visual expression of your brand. No clutter, no overused symbols –
+            just smart design that looks good everywhere.
+          </p>
+          <p>
+            Every logo is crafted to work on social media, websites, and print.
+            We mix modern minimal forms with premium touches, so your brand feels both
+            approachable and high-end.
+          </p>
+          <div class="badge-row">
+            <div class="badge">Modern & minimal focus</div>
+            <div class="badge">Premium brand feel</div>
+            <div class="badge">Clear communication</div>
+          </div>
+        </div>
+
+        <div id="contact" class="contact-card">
+          <h3>Contact & project inquiries</h3>
+          <p>
+            Share a few details about your brand and we’ll get back with a logo
+            concept roadmap.
+          </p>
+          <form>
+            <div class="field">
+              <label for="name">Name / Brand name</label>
+              <input id="name" type="text" placeholder="NovaPeak Finance, Aurora Lux Studio..." />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="you@example.com" />
+            </div>
+            <div class="field">
+              <label for="budget">Budget (optional)</label>
+              <input id="budget" type="text" placeholder="$50 – $200" />
+            </div>
+            <div class="field">
+              <label for="message">What kind of logo are you looking for?</label>
+              <textarea id="message" rows="4" placeholder="Describe your brand, style, colors, and any references you like."></textarea>
+            </div>
+            <button type="button" class="btn-primary">
+              Send request
+            </button>
+            <p class="contact-note">
+              *Form is a visual demo. You can connect it later with your email or a contact form service.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> LogoForge. Crafted with clarity & intention.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
